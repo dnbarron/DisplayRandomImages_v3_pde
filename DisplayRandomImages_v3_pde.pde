@@ -49,6 +49,7 @@ void setup() {
 
   textAlign(CENTER);
   textSize(50);
+  fill(0, 0, 255);
   text("Press any key to pause. Press Esc to exit.", width/2, height/2);
 
   // Create IntList from 0 to number of files in directory

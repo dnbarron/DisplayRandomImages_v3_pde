@@ -65,34 +65,32 @@ void draw() {
    int test = frameCount % (interval * fRate);
 
    if (test == (interval * fRate - 1)){
-    int numimages = int(random(minimages, maximages));
-    background(backgroundCol);  //  background colour
+     int numimages = int(random(minimages, maximages));
+     background(backgroundCol);  //  background colour
 
-    Image[] img = new Image[numimages];                          // to hold the images once loaded
+     Image[] img = new Image[numimages];                          // to hold the images once loaded
 
-    files.shuffle();  // shuffle IntList that runs from 0 to 1-(number of files in folder). Avoids duplicates
+     files.shuffle();  // shuffle IntList that runs from 0 to 1-(number of files in folder). Avoids duplicates
 
-    for (int i = 1; i <= numimages; i++) {
-      int n = files.get(i - 1);
-      PImage tempimg = loadImage(yourPath + "\\" + someFolderList[n]);  // Load the image into the program
-      img[i-1] = new Image(tempimg, xfactor);
-
-    }
+     for (int i = 1; i <= numimages; i++) {
+       int n = files.get(i - 1);
+       PImage tempimg = loadImage(yourPath + "\\" + someFolderList[n]);  // Load the image into the program
+       img[i-1] = new Image(tempimg, xfactor);
+     }
 
     // Checks to see if images overlap
-    for (int i = 0; i < numimages - 2; i++) {
-
-      Image img1 = img[i];
-      for (int j = i + 1; j < numimages; j++) {
+   for (int i = 0; i < numimages - 2; i++) {
+     Image img1 = img[i];
+     for (int j = i + 1; j < numimages; j++) {
         // could check to see if collision already true here
-        Image img2 = img[j];
-        if (img1.x + img1.w > img2.x &&
+       Image img2 = img[j];
+       if (img1.x + img1.w > img2.x &&
           img1.x < img2.x + img2.w &&
           img1.y + img1.h > img2.y &&
           img1.y < img2.y + img2.h) {
-            img1.overlapSet();
-            img2.overlapSet();
-            break;
+          img1.overlapSet();
+          img2.overlapSet();
+          break;
         }
       }
     }
@@ -108,7 +106,6 @@ void draw() {
     fill(backgroundCol, 50);
     rect(0,0,width,height);
   }
-
 
 //  saveFrame("output/image####.png");
 }

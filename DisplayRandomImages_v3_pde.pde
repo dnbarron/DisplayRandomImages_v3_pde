@@ -68,76 +68,41 @@ void draw() {
     int numimages = int(random(minimages, maximages));
     background(backgroundCol);  //  background colour
 
-    PImage[] img = new PImage[numimages];                          // to hold the images once loaded
-    ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();  // To hold the locations of the images
-    StringList imageList = new StringList();                        // To hold file names of images
-    boolean[] collision = new boolean[numimages];
+    Image[] img = new Image[numimages];                          // to hold the images once loaded
 
     files.shuffle();  // shuffle IntList that runs from 0 to 1-(number of files in folder). Avoids duplicates
 
     for (int i = 1; i <= numimages; i++) {
       int n = files.get(i - 1);
-      int x = int(random(width));
-      int y = int(random(height));
-      img[i-1] = loadImage(yourPath + "\\" + someFolderList[n]);  // Load the image into the program
+      PImage tempimg = loadImage(yourPath + "\\" + someFolderList[n]);  // Load the image into the program
+      img[i-1] = new Image(tempimg, xfactor);
 
-      // Check to see if image would be off the screen in x direction
-      //  If so, move left to edge of screen
-
-      if (x + img[i-1].width/xfactor > width) {
-        int xOverlap = x + img[i-1].width/xfactor - width;
-        x = x - xOverlap;
-      }
-
-      //  Check to see if image would be off the screen in y direction
-      //  If so, move up to the endge of the screen
-
-      if (y + img[i-1].height/yfactor > height) {
-        int yOverlap = y + img[i-1].height/yfactor - height;
-        y = y - yOverlap;
-      }
-
-      // Add the bounding box of each image to the array
-      rectangles.add(new Rectangle(x, y, img[i-1].width/xfactor, img[i-1].height/yfactor));
-
-      imageList.append(yourPath + "\\" + someFolderList[n]);
-      // Add each image to the array
-
-      // Set overlap indicator to false
-      collision[i - 1] = false;
     }
 
     // Checks to see if images overlap
     for (int i = 0; i < numimages - 2; i++) {
 
-      Rectangle rectangle1 = rectangles.get(i);
+      Image img1 = img[i];
       for (int j = i + 1; j < numimages; j++) {
         // could check to see if collision already true here
-        Rectangle rectangle2 = rectangles.get(j);
-        if (rectangle1.x + rectangle1.width > rectangle2.x &&
-          rectangle1.x < rectangle2.x + rectangle2.width &&
-          rectangle1.y + rectangle1.height > rectangle2.y &&
-          rectangle1.y < rectangle2.y + rectangle2.height) {
-          collision[i] = true;
-          collision[j] = true;
-          break;
+        Image img2 = img[j];
+        if (img1.x + img1.w > img2.x &&
+          img1.x < img2.x + img2.w &&
+          img1.y + img1.h > img2.y &&
+          img1.y < img2.y + img2.h) {
+            img1.overlapSet();
+            img2.overlapSet();
+            break;
         }
       }
     }
 
-    // Increase transparency of images that overlap
-
-    for (int i = 0; i < numimages; i++) {
-      if (collision[i]) {
-        tint(255, alpha);
-      } else {
-        noTint();
-      }
-      Rectangle rectangle = rectangles.get(i);
-      image(img[i], rectangle.x, rectangle.y, img[i].width/xfactor, img[i].height/yfactor);
+    for (int i=0; i<img.length; i++){
+      img[i].display();
+    }
 
     }
-  }  // End of frameCount if statement
+   // End of frameCount if statement
 
   if (test > interval * 40 && frameCount % 4 == 0){
     fill(backgroundCol, 50);

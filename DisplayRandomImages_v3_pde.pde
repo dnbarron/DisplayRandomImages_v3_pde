@@ -4,7 +4,9 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
+// Use ArrayList to hold images to display
 ArrayList<Image> img = new ArrayList<Image>();
+
 
 int minimages = 8;    // Number of images to display at a time
 int maximages = 15;
@@ -19,6 +21,7 @@ int fRate = 60; // frame rate
 
 color backgroundCol = color(175);
 
+// Folder containing images
 String yourPath = "C:\\Users\\dnbar\\Dropbox\\Art\\Ella\\Body of Work\\Ellas course\\DisplayRandomImages_v3_pde\\data";  // Folder containing the images
 File someFolder = new File(yourPath);
 
@@ -36,9 +39,9 @@ FilenameFilter filter = new FilenameFilter() {  // Filter ensures only jpegs are
 String[] someFolderList = someFolder.list(filter);
 IntList files = new IntList();
 
-boolean pause = false;
+boolean pause = false;  // Used to allow viewer to pause programme
 
-void keyPressed() {
+void keyPressed() {  // When any key pressed, programme pauses
   looping = !looping;
 }
 
@@ -65,10 +68,11 @@ void draw() {
 
    int test = frameCount % (interval * fRate);
 
-   if (test == (interval * fRate - 1)){
+   if (test == 0){  // load new set of images every interval * framerate secs
+
      int numimages = int(random(minimages, maximages));
 
-     img.clear();                          // to hold the images once loaded
+     img.clear();       // clear the ArrayList
 
      files.shuffle();  // shuffle IntList that runs from 0 to 1-(number of files in folder). Avoids duplicates
 

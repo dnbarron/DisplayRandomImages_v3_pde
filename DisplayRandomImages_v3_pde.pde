@@ -3,7 +3,6 @@
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.awt.Rectangle;
 
 int minimages = 8;    // Number of images to display at a time
 int maximages = 15;

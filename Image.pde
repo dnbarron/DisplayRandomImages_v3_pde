@@ -5,6 +5,9 @@ class Image{
   float alpha;
   boolean overlap;
   float age = 255;
+//  int fade = int(random(2));
+  int fade = 1;
+  float fadeRate = random(1, 4);
 
 Image(PImage im_, float sizefactor){
     x = random(width);
@@ -24,14 +27,18 @@ Image(PImage im_, float sizefactor){
   }
 
   void display(){
-    // if (overlap){
-    //   tint(255,alpha);
-    // } else {
-      tint(255,age);
-    // }
+//    if (overlap){
+//      tint(255,alpha);
+//    } else {
+       if (fade == 1){
+         tint(255,age);
+      } else {
+        noTint();
+      }
+  // }
 
     image(im, x, y, w, h);
-    age -= 1;
+    age -= fadeRate;
     age = constrain(age, 0, 255);
   }
 

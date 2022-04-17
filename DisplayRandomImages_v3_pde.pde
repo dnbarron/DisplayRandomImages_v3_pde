@@ -14,7 +14,7 @@ int yfactor = xfactor;
 
 int alpha = 180;  // level of transparency for overlapping images
 
-int interval = 6;   //Length of time between screen refreshes in seconds
+int interval = 3;   //Length of time between screen refreshes in seconds
 int fRate = 60; // frame rate
 
 color backgroundCol = color(175);
@@ -101,11 +101,5 @@ void draw() {
     for (int i=0; i<img.size(); i++){
       img.get(i).display();
     }
-
-  // if (test > interval * 40 && frameCount % 4 == 0){
-  //   fill(backgroundCol, 50);
-  //   rect(0,0,width,height);
-  // }
-
 //  saveFrame("output/image####.png");
 }

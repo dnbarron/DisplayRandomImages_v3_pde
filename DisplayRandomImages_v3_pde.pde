@@ -4,6 +4,8 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
+ArrayList<Image> img = new ArrayList<Image>();
+
 int minimages = 8;    // Number of images to display at a time
 int maximages = 15;
 
@@ -46,10 +48,10 @@ void setup() {
   frameRate(fRate);
   noStroke();
 
-  textAlign(CENTER);
-  textSize(50);
-  fill(0, 0, 255);
-  text("Press any key to pause. Press Esc to exit.", width/2, height/2);
+  // textAlign(CENTER);
+  // textSize(50);
+  // fill(0, 0, 255);
+  // text("Press any key to pause. Press Esc to exit.", width/2, height/2);
 
   // Create IntList from 0 to number of files in directory
   for (int i=0; i < someFolderList.length; i++) {
@@ -65,24 +67,23 @@ void draw() {
 
    if (test == (interval * fRate - 1)){
      int numimages = int(random(minimages, maximages));
-     background(backgroundCol);  //  background colour
 
-     Image[] img = new Image[numimages];                          // to hold the images once loaded
+     img.clear();                          // to hold the images once loaded
 
      files.shuffle();  // shuffle IntList that runs from 0 to 1-(number of files in folder). Avoids duplicates
 
-     for (int i = 1; i <= numimages; i++) {
-       int n = files.get(i - 1);
+     for (int i = 0; i < numimages; i++) {
+       int n = files.get(i);
        PImage tempimg = loadImage(yourPath + "\\" + someFolderList[n]);  // Load the image into the program
-       img[i-1] = new Image(tempimg, xfactor);
+       img.add(new Image(tempimg, xfactor));
      }
 
     // Checks to see if images overlap
    for (int i = 0; i < numimages - 2; i++) {
-     Image img1 = img[i];
+     Image img1 = img.get(i);
      for (int j = i + 1; j < numimages; j++) {
         // could check to see if collision already true here
-       Image img2 = img[j];
+       Image img2 = img.get(j);
        if (img1.x + img1.w > img2.x &&
           img1.x < img2.x + img2.w &&
           img1.y + img1.h > img2.y &&
@@ -93,18 +94,18 @@ void draw() {
         }
       }
     }
+  }    // End of frameCount if statement
 
-    for (int i=0; i<img.length; i++){
-      img[i].display();
+  background(backgroundCol);  //  background colour
+
+    for (int i=0; i<img.size(); i++){
+      img.get(i).display();
     }
 
-    }
-   // End of frameCount if statement
-
-  if (test > interval * 40 && frameCount % 4 == 0){
-    fill(backgroundCol, 50);
-    rect(0,0,width,height);
-  }
+  // if (test > interval * 40 && frameCount % 4 == 0){
+  //   fill(backgroundCol, 50);
+  //   rect(0,0,width,height);
+  // }
 
 //  saveFrame("output/image####.png");
 }

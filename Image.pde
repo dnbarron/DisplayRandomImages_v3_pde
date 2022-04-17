@@ -4,6 +4,7 @@ class Image{
   PImage im;
   float alpha;
   boolean overlap;
+  float age = 255;
 
 Image(PImage im_, float sizefactor){
     x = random(width);
@@ -23,17 +24,20 @@ Image(PImage im_, float sizefactor){
   }
 
   void display(){
-    if (overlap){
-      tint(255,alpha);
-    } else {
-      noTint();
-    }
+    // if (overlap){
+    //   tint(255,alpha);
+    // } else {
+      tint(255,age);
+    // }
 
     image(im, x, y, w, h);
+    age -= 1;
+    age = constrain(age, 0, 255);
   }
 
   void overlapSet(){
     overlap = true;
   }
+
 
 }

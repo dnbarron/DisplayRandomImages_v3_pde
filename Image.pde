@@ -7,7 +7,7 @@ class Image{
   float age = 255;
 //  int fade = int(random(2));
 //  int fade = 1;
-  float fadeRate = random(1, 4);
+  float fadeRate = random(0, 3);
 
 Image(PImage im_, float sizefactor){
     x = random(width);  // x location of image

@@ -16,7 +16,7 @@ int yfactor = xfactor;
 
 int alpha = 180;  // level of transparency for overlapping images
 
-int interval = 6;   //Length of time between screen refreshes in seconds
+int interval = 10;   //Length of time between screen refreshes in seconds
 int fRate = 60; // frame rate
 
 color backgroundCol = color(175);

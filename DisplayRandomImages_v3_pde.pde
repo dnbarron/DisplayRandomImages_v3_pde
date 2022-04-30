@@ -1,6 +1,6 @@
 // Reads random images from a folder and displays in random locations on the screen
-// Press <space> to pause, <Esc> to exit
 
+// Press <space> to pause, <Esc> to exit
 import java.io.File;
 import java.io.FilenameFilter;
 
@@ -16,8 +16,8 @@ int yfactor = xfactor;
 
 int alpha = 180;  // level of transparency for overlapping images
 
-int interval = 10;   //Length of time between screen refreshes in seconds
-int fRate = 60; // frame rate
+int interval = 9;   //Length of time between screen refreshes in seconds
+int fRate = 30; // frame rate
 
 color backgroundCol = color(175);
 
@@ -48,6 +48,7 @@ void keyPressed() {  // When any key pressed, programme pauses
 void setup() {
 
   fullScreen();
+//size(600,600);
   frameRate(fRate);
   noStroke();
 
@@ -105,5 +106,5 @@ void draw() {
     for (int i=0; i<img.size(); i++){
       img.get(i).display();
     }
-//  saveFrame("output/image####.png");
+ // saveFrame("output/image#####.png");
 }
